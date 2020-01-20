@@ -1,1 +1,23 @@
 {% extends 'layout.html' %}
+{% block content %}
+    {% for item in posts %}
+        <div class="card">
+            <div class="card-header">
+                <a href="/posts/{{ item.id }}"> {{ item.title }}</a>
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p>
+                        {{ item.content }}
+                    </p>
+                    <footer class="blockquote-footer">
+                        <a href="post/edit/{{ item.id }}" class="card-link">Edit</a>
+                        <a href="post/delete/{{ item.id }}" class="card-link">Delete</a>
+                    </footer>
+                </blockquote>
+
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
