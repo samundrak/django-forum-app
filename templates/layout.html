@@ -8,7 +8,6 @@
     </title>
     <link rel="stylesheet" href="/static/styles/bootstrap.min.css"/>
     <link rel="stylesheet" href="/static/styles/custom.css"/>
-
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark  bg-dark">
@@ -60,6 +59,9 @@
             {% for message in messages %}
                 {% if message.tags == "info" %}
                     <div class="alert alert-danger">{{ message }}</div>
+                {% elif message.tags == "error" %}
+                    <div class="alert alert-danger">{{ message }}</div>
+
                 {% else %}
                     <div class="alert alert-{{ message.tags }}">{{ message }}</div>
 

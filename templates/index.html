@@ -5,14 +5,22 @@
             <div class="card-header">
                 <a href="/posts/{{ item.id }}"> {{ item.title }}</a>
             </div>
-            <div class="card-body">
+            <div class="card-body ">
                 <blockquote class="blockquote mb-0">
-                    <p>
+                    <p class="limit-string">
                         {{ item.content }}
                     </p>
                     <footer class="blockquote-footer">
-                        <a href="post/edit/{{ item.id }}" class="card-link">Edit</a>
-                        <a href="post/delete/{{ item.id }}" class="card-link">Delete</a>
+
+                        Author: {{ item.user.first_name }} &nbsp;{{ item.user.first_name }}
+                        | {{ item.created_at }}
+                        {% if item.user_id == user.id and user.is_authenticated%}
+
+                            <br/>
+                            <a href="/posts/edit/{{ item.id }}" class="card-link">Edit</a>
+                            <a href="/posts/delete/{{ item.id }}" class="card-link">Delete</a>
+                        {% endif %}
+
                     </footer>
                 </blockquote>
 

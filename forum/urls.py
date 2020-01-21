@@ -24,5 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register', registerView.register_view),
     path('', include('django.contrib.auth.urls')),
-    path('posts/create', postView.post_create)
+    path('posts/<int:id>', postView.post_single),
+    path('posts/create', postView.post_create),
+    path('posts/delete/<int:id>', postView.post_delete),
+    path('posts/edit/<int:id>', postView.post_edit)
 ]
