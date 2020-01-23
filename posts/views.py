@@ -6,21 +6,27 @@ from django.contrib import messages
 
 # Create your views here.
 def home_view(request):
-    posts = Posts.objects.all().order_by('-created_at')
+    query = request.GET.get('query')
+    mode_query = Posts.objects
+    if query:
+        mode_query = mode_query.filter(title__contains=query, content__contains=query)
+
+    posts = mode_query.all().order_by('-created_at')
     return render(request, 'index.html', {
-        'posts': posts
+        'posts': posts,
+        'query': query or ''
     })
 
 
 def post_single(request, id):
-    post = Posts.objects.all().filter(id=id).first();
+    post = Posts.objects.all().filter(id=id).first()
     return render(request, 'posts/single.html', {
         'post': post
     })
 
 
 def post_delete(request, id):
-    post = Posts.objects.all().filter(user=request.user, id=id);
+    post = Posts.objects.all().filter(user=request.user, id=id)
     print(post)
     if len(post) == 0:
         messages.warning(request, "Unauthorized access!")
@@ -49,23 +55,6 @@ def post_edit(request, id):
         'form': form
     }
     return render(request, 'posts/create.html', context)
-    # post = Posts.objects.filter(id=id).first()
-    # if not post:
-    #     return redirect('/')
-    # if post.user_id != request.user.id:
-    #     return redirect('/')
-    # profile = request.user
-    # if request.method == 'POST':
-    #     form = PostForm(request.POST or None, instance=request.user)
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect('/posts/'+ str(post.id))
-    # content = {'title': post.title, 'content': post.content}
-    # form = PostForm(initial=content)
-    # return render(request, 'posts/create.html', {
-    #     'form': form,
-    #     'title': 'Edit'
-    # })
 
 
 def post_create(request):

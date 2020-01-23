@@ -3,31 +3,8 @@
 {% block title %} {{ post.title }} {% endblock %}
 
 {% block content %}
-    <div class="card">
-        <div class="card-header">
-            <a href="/posts/{{ post.id }}"> {{ post.title }}</a>
-        </div>
-        <div class="card-body ">
-            <blockquote class="blockquote mb-0">
-                <p>
-                    {{ post.content }}
-                </p>
-                <footer class="blockquote-footer">
+    {% include 'posts/post.html'  with post=post %}
 
-                    Author: {{ post.user.first_name }} &nbsp;{{ post.user.last_name }}
-                    | {{ post.created_at }}
-                    {% if post.user_id == user.id and user.is_authenticated %}
-
-                        <br/>
-                        <a href="/posts/edit/{{ post.id }}" class="card-link">Edit</a>
-                        <a href="/posts/delete/{{ post.id }}" class="card-link">Delete</a>
-                    {% endif %}
-
-                </footer>
-            </blockquote>
-
-        </div>
-    </div>
     <hr/>
     <h1 class="display-4">Comments</h1>
     {% if user.is_authenticated %}

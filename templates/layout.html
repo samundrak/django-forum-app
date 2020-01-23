@@ -30,7 +30,8 @@
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ user.first_name }}&nbsp;{{ user.last_name }}
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/profile/{{ user.id }}">My Profile</a>
                         <a class="dropdown-item" href="/logout">Logout</a>
                     </div>
                 </li>
@@ -45,8 +46,8 @@
             {% endif %}
 
         </ul>
-        <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <form class="form-inline mt-2 mt-md-0" action="/search" method="get">
+            <input name="query" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" value="{{ query }}">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>

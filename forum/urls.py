@@ -17,11 +17,15 @@ from django.contrib import admin
 from posts import views as postView
 from register import views as registerView
 from comments import views as commentView
+from users import views as user_view
 from django.urls import path, include
 
 urlpatterns = [
     path('', postView.home_view),
-    path('admin/', admin.site.urls),
+    path('search/', postView.home_view),
+    path('profile/<int:id>', user_view.profile),
+    path('profile/edit', user_view.edit_profile),
+    path('password/', user_view.change_password),
     path('register', registerView.register_view),
     path('', include('django.contrib.auth.urls')),
     path('posts/<int:id>', postView.post_single),

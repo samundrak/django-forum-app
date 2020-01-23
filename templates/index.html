@@ -1,31 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
     {% for item in posts %}
-        <div class="card">
-            <div class="card-header">
-                <a href="/posts/{{ item.id }}"> {{ item.title }}</a>
-            </div>
-            <div class="card-body ">
-                <blockquote class="blockquote mb-0">
-                    <p class="limit-string">
-                        {{ item.content }}
-                    </p>
-                    <footer class="blockquote-footer">
-
-                        Author: {{ item.user.first_name }} &nbsp;{{ item.user.last_name }}
-                        | {{ item.created_at }}
-                        {% if item.user_id == user.id and user.is_authenticated%}
-
-                            <br/>
-                            <a href="/posts/edit/{{ item.id }}" class="card-link">Edit</a>
-                            <a href="/posts/delete/{{ item.id }}" class="card-link">Delete</a>
-                        {% endif %}
-
-                    </footer>
-                </blockquote>
-
-            </div>
-        </div>
+        {% include 'posts/post.html'  with post=item %}
     {% endfor %}
 
 {% endblock %}
