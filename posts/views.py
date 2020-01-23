@@ -34,20 +34,20 @@ def post_edit(request, id):
     instance = get_object_or_404(Posts, id=id)
     if not instance:
         return redirect('/')
-    
+
     if instance.user_id != request.user.id:
         return redirect('/')
-    
+
     form = PostForm(request.POST or None, instance=instance)
     if form.is_valid():
-        instance = form.save(commit= False)
+        instance = form.save(commit=False)
         instance.save()
-        messages.success(request,"Post has been updated.")
-        return redirect('/posts/'+ str(instance.id)) 
+        messages.success(request, "Post has been updated.")
+        return redirect('/posts/' + str(instance.id))
     context = {
         'title': 'Edit',
         'form': form
-    }    
+    }
     return render(request, 'posts/create.html', context)
     # post = Posts.objects.filter(id=id).first()
     # if not post:

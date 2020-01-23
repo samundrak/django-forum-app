@@ -14,7 +14,7 @@
                 </p>
                 <footer class="blockquote-footer">
 
-                    Author: {{ post.user.first_name }} &nbsp;{{ post.user.first_name }}
+                    Author: {{ post.user.first_name }} &nbsp;{{ post.user.last_name }}
                     | {{ post.created_at }}
                     {% if post.user_id == user.id and user.is_authenticated %}
 
@@ -28,4 +28,23 @@
 
         </div>
     </div>
+    <hr/>
+    <h1 class="display-4">Comments</h1>
+    {% if user.is_authenticated %}
+        {% include 'comments/post.html' with post=post %}
+    {% endif %}
+    {% if not user.is_authenticated %}
+        <div class="alert alert-warning" role="alert">
+            Please
+            <a href="/login">Login</a> or
+            <a href="/register">Register</a>
+            to comment
+        </div>
+    {% endif %}
+    <div id="commentSection" data-post-id="{{ post.id }}">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
 {% endblock %}
+

@@ -12,7 +12,7 @@
                     </p>
                     <footer class="blockquote-footer">
 
-                        Author: {{ item.user.first_name }} &nbsp;{{ item.user.first_name }}
+                        Author: {{ item.user.first_name }} &nbsp;{{ item.user.last_name }}
                         | {{ item.created_at }}
                         {% if item.user_id == user.id and user.is_authenticated%}
 

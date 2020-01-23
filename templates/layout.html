@@ -28,7 +28,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ user.first_name }}
+                        {{ user.first_name }}&nbsp;{{ user.last_name }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/logout">Logout</a>
@@ -73,10 +73,22 @@
         {% endif %}
         {% block content %} {% endblock %}
     </div>
+
+    <script>
+        const user = {
+            id: '{{ user.id }}'
+        }
+        if (user.id === 'None') {
+            user.id = ''
+        } else {
+            user.id = parseInt(user.id)
+        }
+        window.auth = Object.freeze(user)
+    </script>
 </main>
 <script src="/static/js/jquery.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
-{#<script src="static/js/script.js"></script>#}
+<script src="/static/js/script.js"></script>
 </body>
 </html>
 

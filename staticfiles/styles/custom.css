@@ -1,6 +1,7 @@
 .main-container {
-    margin: 2rem;
+    margin-top: 1rem;
 }
+
 
 .limit-string {
     text-overflow: ellipsis;
